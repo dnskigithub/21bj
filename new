@@ -1,0 +1,101 @@
+import random
+import os
+
+def print_ruka(i_max):
+    for i in range(i_max):
+        if ruka_play[i] == 2:
+            print("Valet, 2")
+        elif ruka_play[i] == 3:
+            print("Dama, 3")
+        elif ruka_play[i] == 4:
+            print("Korol, 4", )
+        elif ruka_play[i] == 11:
+            print("Tuz, 11")
+        else:
+            print(ruka_play[i])
+
+def print_ruka_bot(i_max):
+    for i in range(i_max):
+        if ruka_bot[i] == 2:
+            print("Dama, 2")
+        elif ruka_bot[i] == 3:
+            print("Dama, 3")
+        elif ruka_bot[i] == 4:
+            print("Korol, 4", )
+        elif ruka_bot[i] == 11:
+            print("Tuz, 11")
+        else:
+            print(ruka_bot[i])
+print ('igraem? y/n')
+answ_let_game = input()
+while answ_let_game == 'y':
+    os.system('cls')
+    koloda = [2, 3, 4, 6, 7, 8, 9, 10, 11] * 4
+    ruka_play = []
+    ruka_bot = []
+    ruka_play.append(koloda.pop(random.choice(koloda)))
+    ruka_bot.append(koloda.pop(random.choice(koloda)))
+    print_ruka(len(ruka_play))
+    count_bot = sum(ruka_bot)
+    count_play = sum(ruka_play)
+    print("yet ? y/n")
+    answ = input()
+    while answ == 'y':
+        ruka_play.append(koloda.pop(random.choice(koloda)))
+        ruka_bot.append(koloda.pop(random.choice(koloda)))
+        print_ruka(len(ruka_play))
+        count_bot = sum(ruka_bot)
+        count_play = sum(ruka_play)
+        if (count_play >= 21):
+            break
+        elif(count_bot == 21):
+            break
+        print('yet y/n')
+        answ = input()
+        if answ == 'n':
+            break
+    os.system('cls||clear')
+    print('Itog: ')
+    print_ruka(len(ruka_play))
+    print('vsego',count_play)
+    print('\n')
+    print('PC:')
+    print_ruka_bot(len(ruka_bot))
+    print('vsego',count_bot)
+    if(count_play == count_bot):
+        print('yet!')
+        ruka_play.append(koloda.pop(random.choice(koloda)))
+        ruka_bot.append(koloda.pop(random.choice(koloda)))
+        print_ruka(len(ruka_play))
+        count_bot = sum(ruka_bot)
+        count_play = sum(ruka_play)
+        print('Itog: ')
+        print_ruka(len(ruka_play))
+        print('vsego',count_play)
+        print('\n')
+        print('PC:')
+        print_ruka_bot(len(ruka_bot))
+        print('vsego',count_bot)
+    if(count_play == 21):
+        print('Win!')
+    elif(count_bot == 21):
+        print('loss!')
+    elif(count_bot > 21 and count_play < 21):
+        print('win!')
+    elif(count_bot< 21 and count_play > 21 ):
+        print('loss!')
+    elif (count_bot<21 and count_play< 21):
+        if((21-count_play)<(21-count_bot)):
+            print('win!')
+        elif((21-count_play)>(21-count_bot)):
+            print('loss')
+    elif(count_bot>21 and count_play>21):
+        if((count_play-21)<(count_bot-21)):
+            print('win!')
+        elif((count_play-21)>(count_bot-21)):
+            print('loss')
+    os.system('pause')
+    os.system('cls')
+    print ('igraem? y/n')
+    answ_let_game = input()
+
